@@ -1,2 +1,3 @@
 tera/teracert/.terraform/
 tera/teracert/.terraform.lock.hcl
+tera/public_modules
