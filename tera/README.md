@@ -1,5 +1,5 @@
 Regarding this terraform implementation
-The vpc module is a public module, except the on the terraform has at
+The vpc module is a public module, except the on the terraform repository site is out of date
 ```source  = "terraform-aws-modules/vpc/aws"```
 Are out of date, so I downloaded from github instead
 
