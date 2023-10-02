@@ -8,17 +8,17 @@ resource "aws_iam_role_policy" "lambda_policy" {
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode(
     {
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "lambda:*",
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  }
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action = [
+            "lambda:*",
+          ]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ]
+    }
   )
 }
 

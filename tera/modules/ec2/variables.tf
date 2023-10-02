@@ -12,3 +12,7 @@ variable "key_name" {
 variable "ami_id" {
   description = "The AMI ID for the EC2 instance."
 }
+
+variable vpc_id {}
+
+variable public_subnets {}

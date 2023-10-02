@@ -20,7 +20,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 
   filter {
@@ -39,6 +39,8 @@ module "ec2" {
   ami_id        = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   key_name      = var.key_name # Replace with your key pair name
+  vpc_id = module.vpc.vpc_id
+  public_subnets = module.vpc.public_subnets
   # iam_instance_profile = module.iam.iam_instance_profile_name
 }
 
@@ -52,8 +54,9 @@ module "iam" {
 module "vpc" {
 
   source = "../modules/vpc"
-
-#   vpc_cidr        = var.vpc_cidr
-#   public_subnets  = module.vpc.public_subnets
-#   private_subnets = module.vpc.private_subnets
+  # vpc_id = module.vpc.vpc_id
+  #   vpc_cidr        = var.vpc_cidr
+  #   public_subnets  = module.vpc.public_subnets
+  #   private_subnets = module.vpc.private_subnets
 }
+

@@ -2,7 +2,7 @@
 # https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
 
 module "vpc" {
-  source  = "../../public_modules/terraform-aws-vpc-master"
+  source = "../../public_modules/terraform-aws-vpc-master"
   # version = "3.0.0"
   # insert the 49 required variables here
 
@@ -10,28 +10,30 @@ module "vpc" {
   cidr = var.vpc_cidr
 
 
-  azs = ["us-east-1a", "us-east-1b"]
-  public_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
+  azs             = ["us-east-1a", "us-east-1b"]
+  public_subnets  = ["10.0.1.0/24", "10.0.2.0/24"]
   private_subnets = ["10.0.3.0/24", "10.0.4.0/24"]
 
 
   # Single NAT Gateway, see docs linked above
-  enable_nat_gateway = true
-  single_nat_gateway = true
+  enable_nat_gateway     = true
+  single_nat_gateway     = true
   one_nat_gateway_per_az = false
 
   tags = {
-    Name = "tutcert-vpc"
-    Project = "tutcert.zerosubstance.org"
+    Name        = "tutcert-vpc"
+    Project     = "tutcert.zerosubstance.org"
     Environment = "development"
-    ManagedBy = "terraform"
+    ManagedBy   = "terraform"
   }
 
   private_subnet_tags = {
+    Name = "tutcert-private-subnet"
     Role = "private"
   }
 
   public_subnet_tags = {
+    Name = "tutcert-public-subnet"
     Role = "public"
   }
 }

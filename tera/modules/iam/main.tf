@@ -1,7 +1,7 @@
 # modules/iam/main.tf
 
 resource "aws_iam_role_policy" "ec2_policy" {
-  name        = "ec2_role_policy"
+  name = "ec2_role_policy"
   role = aws_iam_role.ec2_role.id
 
 

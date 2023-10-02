@@ -140,11 +140,52 @@ Duplicate both subnets in an alternate AZ
 ![Alt text](./images/route_table.png)
 
 
-![Alt text](image.png)
 Note that to make the subnets private, just don't place them in the table.
 * Probably best to leave the main Route table alone and associate each new subnet with a custom route table
-* 
+
+# VPC Security 
+* Use ACL (allow deny traffic to ports)
+* security groups
+
+THe vid is going to use security groups. Will do both in terraform
 
 
+# Storage
 
+* Database
+* Application files 
+  * File Block and Object
+  * ![Alt text](./images/storage.png)
+   
+## File System
+### Elastic File System (EFS)
+* Storage grows and shrinks with actual files stored. Pay only for storage, not setup or change fees
+* Has a web interface
+
+### FSx  - file storage
+* Lustre
+* NetApp
+* ONTAP 
+* OpenZFS
+* Windows File Server
+
+## Block Storage
+* Ec2 (Elastic Compute Cloud) Instance Storage
+  * Directly attached storage
+  * Lifecycle is tied to the Instance Store, storage is not seperate. If instance is recreated, storage is lost
+* Elastic Block Store EBS (Persistenet storage)
+  * Connected to an Ec2 but seperate
+  * Attaches to one ec2 at a time (usually)
+    * Use EBS MultiAttach to connect to more (limits)
+  * SSD and dSSD
+  * Backed up with snapshots
+* Limitations include must be accessed from an ec2 or (maybe if available in your area and storage) a few EC2s. Also size limits
+
+## Object storage
+### S3 (Simple Storage Solution)
+* Flat and distributed
+* 99.99 % availability
+* Bucket is outside contact name with the key
+  * Objects placed in bucket
+* Everything is private by default
 
