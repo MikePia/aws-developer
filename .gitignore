@@ -1,3 +1,11 @@
 tera/teracert/.terraform/
 tera/teracert/.terraform.lock.hcl
 tera/public_modules
+public_modules
+public_modules/terraform-aws-vpc-master/.github/contributing.md
+public_modules/terraform-aws-vpc-master/.github/workflows/lock.yml
+public_modules/terraform-aws-vpc-master/.github/workflows/pr-title.yml
+public_modules/terraform-aws-vpc-master/.github/workflows/pre-commit.yml
+public_modules/terraform-aws-vpc-master/.github/workflows/release.yml
+public_modules/terraform-aws-vpc-master/.github/workflows/stale-actions.yaml
+tera/teracert/.env.sh

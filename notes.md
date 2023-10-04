@@ -188,4 +188,26 @@ THe vid is going to use security groups. Will do both in terraform
 * Bucket is outside contact name with the key
   * Objects placed in bucket
 * Everything is private by default
+* Bucket policies can only be attached to buckets
+  * A policy applies to all objects in a bucket
+https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/example-bucket-policies.html
 
+# Databases
+## RDS ...
+## Purpose-built Databases
+The tut app has little needs, no relations required, DynamoDb might be right
+* Full Contact Management system
+  * DocumentDB MongoDB compatabile
+* Track Social network
+    * Neptune
+* Immutable ledger (records can never ber removed)
+  * QLDB  
+* ElastiCache
+* MemoryDB
+* Timestream
+
+## DynamoDB
+Altered Employee Table
+![Alt text](./images/new_arch.png)
+  
+  ##

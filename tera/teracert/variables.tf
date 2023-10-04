@@ -25,3 +25,25 @@ locals {
 }
 
 variable "vpc_cidr" {}
+
+variable "my_cidr_1" {
+  type      = string
+  sensitive = true
+  default   = "noyb"
+}
+
+variable "my_cidr_2" {
+  type      = string
+  sensitive = true
+  default   = "noyb"
+}
+
+variable "pg_username" {
+  type      = string
+  sensitive = true
+}
+
+variable "pg_password" {
+  type      = string
+  sensitive = true
+}

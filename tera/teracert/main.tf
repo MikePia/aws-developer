@@ -39,9 +39,12 @@ module "ec2" {
   ami_id        = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   key_name      = var.key_name # Replace with your key pair name
-  vpc_id = module.vpc.vpc_id
-  public_subnets = module.vpc.public_subnets
+  vpc_id        = module.vpc.vpc_id
+  # public_subnets = module.vpc.public_subnets
   # iam_instance_profile = module.iam.iam_instance_profile_name
+  public_subnet1_id = module.vpc.public_subnet1_id
+  my_cidr_1         = var.my_cidr_1
+  my_cidr_2         = var.my_cidr_2
 }
 
 #  Create role based access from our ec2 to the database and to buckets
@@ -53,10 +56,22 @@ module "iam" {
 
 module "vpc" {
 
-  source = "../modules/vpc"
-  # vpc_id = module.vpc.vpc_id
-  #   vpc_cidr        = var.vpc_cidr
-  #   public_subnets  = module.vpc.public_subnets
-  #   private_subnets = module.vpc.private_subnets
+  source            = "../modules/vpc"
+  data_subnet1_id   = module.vpc.data_subnet1_id
+  data_subnet2_id   = module.vpc.data_subnet2_id
+  public_subnet1_id = module.vpc.public_subnet1_id
+  # public_subnets = module.vpc.public_subnets.id
+  my_cidr_1 = var.my_cidr_1
+  my_cidr_2 = var.my_cidr_2
 }
 
+module "rdc" {
+  source          = "../modules/rds"
+  vpc_id          = module.vpc.vpc_id
+  data_subnet1_id = module.vpc.data_subnet1_id
+  data_subnet2_id = module.vpc.data_subnet2_id
+  # public_subnet1_id = module.vpc.public_subnet1_id
+  pg_username = var.pg_username
+  pg_password = var.pg_password
+
+}
