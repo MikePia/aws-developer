@@ -1,4 +1,14 @@
 AWT Technical Essentials Its review-
+# Secrets
+https://www.youtube.com/watch?v=3N0tGKwvBdA
+https://github.com/antonputra/tutorials/tree/main/lessons/162
+Current;y using 2 things that are good enough for this cert project.
+1. secrets storeed in plain text locally in .env.sh, Not checked in to git
+2. the tfstate file is stored remotely in s3, (so also not checked in to git)
+3. To be more secure (whatch vid if necessary)
+   1. Use pass shell program
+   2. Use AWS KMS
+   3. More possibilites in vid
 ### How to Choose region
 * Compliance, regulation
 * Latency determined by closeness
@@ -194,6 +204,7 @@ https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/example-bucket-polic
 
 # Databases
 ## RDS ...
+Scale bits by upgrading independent parts
 ## Purpose-built Databases
 The tut app has little needs, no relations required, DynamoDb might be right
 * Full Contact Management system
@@ -210,4 +221,115 @@ The tut app has little needs, no relations required, DynamoDb might be right
 Altered Employee Table
 ![Alt text](./images/new_arch.png)
   
-  ##
+### The DBs
+![Alt text](./images/theDBs.png)
+
+### Monitoring
+Emphasizes the desirabliity of finding problems before your clients do
+### Metrics
+* Ec2 Metrics
+* Db Metrics
+* Numbers of visits/clicks
+* App health
+* Cloudwatch supplies a bunch of metrics
+* Specifics
+  * CPU thresholds
+  * Network utilization
+  * Disk performance
+  * Memory uitlization
+  * logs
+  * S3
+    * size
+    * number
+    * http requests
+  * RDS
+    * db connections
+    * cpu
+    * diskspace
+  * Ec2
+    * CPU
+    * Network utilization
+    * Disk Performan ce
+    * Status
+  
+  ### Features of cloud watch
+  Demo showing a user experience
+
+
+  ## Single point of failure
+In the tut app:
+*   There is currently an ec2 with dynamodb and s3. DBD and S3 are high availabilty wi failover by default. EC2 is not.
+    *   Plan is to expand to a 2nd AZ and to mutiple instances (Expand "horizontally")
+And to mangge the fleet of EC2s with a Load Balancer(ELB)
+
+![Alt text](./images/horizontal.png)
+
+The idea is to increase availability you need to increase redundancy
+99.99% up time is is 52 min down time per year
+99.999% is 5.26 minutes per year
+
+The VPC is now
+![Alt text](./images/subnet_az.png)
+
+And now we have to worky about
+* Replication 
+  * Multiple EC2s  --- need to automate
+* Customer Redirection
+  * Solution is DNS and/or Load Balancer
+* Type availability
+  * Active-passive
+    * one system available at a time
+  * Active-active
+    * Both active
+
+
+## Elastic Load Balancing (ELB)
+* Application
+  * Web traffic  - 
+* Network
+* Gateway
+  * 3rdf party
+
+1. Define a listener
+   1. Set up port and protocol
+2. Target - Target Group
+   1. Like Ec2, lambda or IP
+   2. Each target needs to implement a health check of the LB to usefor both TCP and HTTP/S checks
+3. A RULE determines how the LB reacts
+   1. Rule is source IP and client address
+
+
+* Console choices
+  * Applicaytion lb
+  * Internal or **internet facing**
+  * Availability zone to subnet
+  * Security Group
+    * 80 from anywhere for example
+  * Routing
+    * Create a Target
+      * Type
+      * Name
+      * Instances (subnets)
+    * (select the routing just ctreated
+  * Get the DNS URL and run it
+
+Extra note, uncluear if any of this affects the application. LIke is app responsible to start a session for sticky
+The lb decides where to send based on 
+* protocol
+  * Like for ex /upload may require a specific target
+* sticky
+  * Uses cookies to maitin a state. 
+
+## Auto scaling
+* Create a launch template (can create one from an existing ec2)
+  * ami, instance type, sg, storage volumes, kery-pair at least
+* Create asn auto scaling group
+  * Specify vpc and subnets (at least 2 in 2 az)
+  * On demand or spot instance
+  * min and max 
+  * Triggers can be simple or have different conditions for different actions
+* Choose a target tracking scaling policy
+
+
+# Redesign of app
+![Alt text](./imates/../images/redesign.png)

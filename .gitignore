@@ -9,3 +9,4 @@ public_modules/terraform-aws-vpc-master/.github/workflows/pre-commit.yml
 public_modules/terraform-aws-vpc-master/.github/workflows/release.yml
 public_modules/terraform-aws-vpc-master/.github/workflows/stale-actions.yaml
 tera/teracert/.env.sh
+AWS-Certified*
