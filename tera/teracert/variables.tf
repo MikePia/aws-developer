@@ -47,3 +47,7 @@ variable "pg_password" {
   type      = string
   sensitive = true
 }
+
+
+variable "domain_name" {}
+variable "alternative_name" {}
